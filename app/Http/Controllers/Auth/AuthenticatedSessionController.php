@@ -16,8 +16,12 @@ class AuthenticatedSessionController extends Controller
     /**
      * Show the login page.
      */
-    public function create(Request $request): Response
-    {
+    public function create(Request $request): Response|RedirectResponse
+    {   
+        $user = Auth::check();
+        if ($user) {
+            return redirect()->route('home');
+        }
         return Inertia::render('auth/login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => $request->session()->get('status'),
@@ -27,13 +31,13 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+        
+        return redirect()->intended(route('/', absolute: false));
+        // 서버에서 클라이언트에게 하드 리다이렉트 실시 spa 라우터 안씀
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\ApiServerInterface;
+use App\Services\ApiServer;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->bind(ApiServerInterface::class, ApiServer::class);
     }
 
     /**

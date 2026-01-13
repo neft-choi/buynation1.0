@@ -27,7 +27,12 @@ return [
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],
-
+    'external_api' => [
+        'base_url' => env('FLASK_URL', 'http://3.35.79.133:5000'),
+    ],
+    'jwt_secret' => [
+        'key' => env('JWT_SECRET', ''),
+    ],
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

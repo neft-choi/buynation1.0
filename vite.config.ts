@@ -28,6 +28,13 @@ export default defineConfig({
         alias: {
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
-    }
+    },
+    server: {
+        host: '0.0.0.0',        // 중요
+        hmr: {
+        host: '172.30.1.26',        // 🔥 여기
+        protocol: 'ws',
+        },
+    },
  
 });

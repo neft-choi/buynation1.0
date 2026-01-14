@@ -30,9 +30,9 @@ export default defineConfig({
         },
     },
     server: {
-        host: '0.0.0.0',        // 중요
+        host: '0.0.0.0',       
         hmr: {
-        host: '172.30.1.26',        // 🔥 여기
+        host: '172.30.1.26',       
         protocol: 'ws',
         },
     },

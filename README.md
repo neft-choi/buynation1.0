@@ -145,6 +145,7 @@ git push origin publish/fe-login
 base: develop
 compare: publish/fe-login
 PR 제목: [FE] 로그인 퍼블리싱
+
 7️⃣ PR 머지 후 브랜치 삭제
 ```
 git checkout develop

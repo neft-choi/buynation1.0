@@ -39,7 +39,6 @@ class HomeController extends Controller
             'tags'=>['베스트'],
             'category'=>$bestCategoryQuery
         ]);
-        // dd($bestCategoryData);
         return Inertia::render('shop/home/index',[
         'metaData' => new ProductMetaResource($products['data']),
         'filterData' => $filter_products['data'],

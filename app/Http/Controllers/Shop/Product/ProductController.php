@@ -50,7 +50,9 @@ class ProductController extends Controller
                      "product_id"  => $product
                  ]
         );
-        // dd($searchData);
+
+        $reviewData = $this->apiServer->send('shop','list_reviews',["product_id"  => $product]);
+        // dd($reviewData);
         //
         return Inertia::render('shop/product/show',[
             'productDetailData' => new ProductDetailResource($productDetailData['data']) 

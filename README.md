@@ -1,8 +1,79 @@
-# Laravel + React Starter Kit
+# 바이네이션 프로젝트 규칙
 
-# 규칙
+## 기술스택
+![Laravel](https://img.shields.io/badge/Laravel-red)
+![React](https://img.shields.io/badge/React-blue)
+![Inertia](https://img.shields.io/badge/Inertia-2.0-purple)
+![Python](https://img.shields.io/badge/Python-blue)
+### 백엔드
+| Category  | Technology                   | Description                  |
+| --------- | ---------------------------- | ---------------------------- |
+| Framework | **Laravel 12**               | Business Logic |
+| Framework | **Flask**               | Backend API |
+| Language  | **PHP 8.x**                  | Server-side language         |
 
-## 브랜치 규
+### 프론트엔드
+| Category  | Technology         | Description                    |
+| --------- | ------------------ | ------------------------------ |
+| Framework | **React 19**       | Frontend UI                    |
+| Adapter   | **Inertia.js 2.0** | SPA without API layer          |
+| Language  | **TypeScript**     | Type-safe frontend development |
+| Styling   | **Tailwind CSS**   | Utility-first CSS framework    |
+
+## 시스템 아키텍쳐
+```
+┌──────────────┐
+│   Frontend   │
+│   (React)    │
+│              │
+│  - UI / UX   │
+│  - Routing   │
+│  - State     │
+└──────┬───────┘
+       │ HTTP Request (Inertia)
+       ▼
+┌──────────────┐
+│   Backend    │
+│  (Laravel)  │
+│              │
+│  - Auth      │
+│  - Session   │
+│  - Validation│
+│  - Business  │
+│    Routing   │
+└──────┬───────┘
+       │ Internal API Request
+       │ (HTTP / JSON)
+       ▼
+┌──────────────┐
+│   API Server │
+│  (Flask)     │
+│              │
+│  - Auth      │
+│  - Session   │
+│  - Dto       │
+└──────────────┘
+```
+### Request / Response Flow
+1️⃣ Client → Laravel
+- React에서 사용자 액션 발생
+- Inertia 또는 API 요청
+- Laravel이 모든 요청의 진입점
+
+2️⃣ Laravel → Flask
+- Laravel이 중간 다리(Gateway) 역할
+- 인증 / 권한 검증 후
+- Flask API로 내부 요청 전달
+
+3️⃣ Flask → Laravel
+- Flask에서 데이터 처리 / AI 연산
+- JSON 응답 반환
+
+4️⃣ Laravel → React
+- Laravel이 응답 가공
+- React에 최종 데이터 전달
+
+## 브랜치 규칙
 
 | Branch    | Description | Direct Commit |
 | --------- | ----------- | ------------- |

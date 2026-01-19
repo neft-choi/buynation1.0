@@ -1,4 +1,5 @@
 <?php 
+    use App\Http\Controllers\Shop\MyPage\IndexController;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
@@ -7,9 +8,7 @@
     Route::prefix('mypage')
     ->name('mypage.') 
     ->group(function () {
-        Route::get('/', function () {
-            return Inertia::render('shop/mypage/index');
-        })->name('index');
+        Route::get('/', [IndexController::class,'index'])->name('index');
 
         Route::get('welcome', function () {
             return Inertia::render('shop/mypage/welcome/index');

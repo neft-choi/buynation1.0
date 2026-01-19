@@ -3,16 +3,23 @@
 namespace App\Http\Controllers\Shop\MyPage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Shop\Mypage\MypageResource;
+use App\Services\ApiServer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ApiServer $apiService)
     {
-        //
+        $mypageData = $apiService->send('shop','my_page_summary');
+        // dd(new MypageResource($mypageData['data']));
+        return Inertia::render('shop/mypage/index',[
+            'mypageData' => new MypageResource($mypageData['data'])
+            ]);
     }
 
     /**

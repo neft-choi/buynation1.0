@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shop\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Shop\Cart\CartResource;
 use App\Http\Resources\Shop\Product\ProductResource;
 use App\Services\ApiServer;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ class CartController extends Controller
      */
     public function index(ApiServer $apiServer,Request $request)
     {
-        $cartData = $apiServer->send('shop','list_products',['tags'=>['신상품'],]);
+        $cartData = $apiServer->send('shop','get_cart');
+        // dd(CartResource::collection($cartData['data']));
         $products = $apiServer->send('shop','get_product_meta');
         return Inertia::render('shop/cart/index',[
-            'cartData' =>  ProductResource::collection($cartData['data']['items']),
+            'cartData' =>  new CartResource($cartData['data']),
             // 'metaData' => $products['data']
         ]);
     }
@@ -37,7 +39,8 @@ class CartController extends Controller
     public function store(ApiServer $apiServer,Request $request)
     {
         //리퀘스트에서 상품 아이디와 수량을 받아서 넘긴다
-        $cartData = $apiServer->send('shop','upsert_cart_item',['product_id'=>1,'quantity'=>2]);
+        $itemData = $request->all();
+        $cartData = $apiServer->send('shop','upsert_cart_item',['product_id'=>$itemData['product_id'],'quantity'=>$itemData['quantity']]);
         return redirect()->back()->with('success',$cartData['message']);
     }
 

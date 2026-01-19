@@ -46,7 +46,6 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        test
         @inertia
     </body>
 </html>

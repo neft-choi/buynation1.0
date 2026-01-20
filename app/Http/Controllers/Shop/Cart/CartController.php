@@ -17,7 +17,7 @@ class CartController extends Controller
     public function index(ApiServer $apiServer,Request $request)
     {
         $cartData = $apiServer->send('shop','get_cart');
-        // dd(CartResource::collection($cartData['data']));
+        // dd( new CartResource($cartData['data']));
         $products = $apiServer->send('shop','get_product_meta');
         return Inertia::render('shop/cart/index',[
             'cartData' =>  new CartResource($cartData['data']),
@@ -71,8 +71,19 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        // dd($request);
+    }
+    public function bulkDestroy(Request $request,ApiServer $apiService)
+    {
+        $ids = $request->input('ids');
+        if (!is_array($ids) || count($ids) === 0) {
+            return response()->json([
+                'message' => '삭제할 상품이 없습니다.',
+            ], 422);
+        }
+        $apiService->send('shop','remove_cart_item',["product_id" => $ids]);
+        return redirect()->back();
     }
 }

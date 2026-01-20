@@ -9,20 +9,14 @@ import ShopSlider from '@/components/shop/shop-slider'
 import ShopBanner from '@/components/shop/shop-banner'
 import { Separator } from '@/components/ui/separator'
 import { SharedData } from '@/types'
+import { Product } from '@/types/shop/public'
 export interface Banner {
     bannerId: number;
     imageUrl: string;
     linkUrl: string;
     title: string;
 }
-export interface RecentProduct {
-    product_id: number;
-    title: string;
-    image_url: number | string; // 지금은 number라서 유연하게
-    original_price: number;
-    price: number;
-    discountRate: number;
-    donation_percent: number;
+export interface RecentProduct extends Product {
     viewed_at: string; // ISO datetime
 }
 
@@ -38,6 +32,7 @@ interface MypageData {
 
 export default function Index({ mypageData }: { mypageData: MypageData }) {
     const { name, banners, couponCount, point, recent_products } = mypageData.data
+    // console.log(recent_products);
     const { } = usePage<SharedData>().props
     return (
         <ShopMypageLayout title='마이페이지' bottomNavigation icon='Cart'>
@@ -102,9 +97,9 @@ export default function Index({ mypageData }: { mypageData: MypageData }) {
                         </ShopHeading>
                     </div>
                     <div className='col-span-1'>
-                        {/* <ShopSlider type='1' dot={false} sliders={cateDatas} >
-                            //api에서 형식 맞춰줘야함
-                        </ShopSlider> */}
+                        <ShopSlider type='1' dot={false} sliders={recent_products} >
+
+                        </ShopSlider>
                     </div>
                 </section>
                 <ShopBanner href='/shop/home' imgUrl='https://placehold.co/375x66' />

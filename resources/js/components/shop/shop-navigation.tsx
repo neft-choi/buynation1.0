@@ -17,6 +17,7 @@ const handleOrder = () => {
 
 export const ShopCartBottomNavigation = forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
     ({ className, children, ...props }, ref) => {
+
         return (
             <div ref={ref} className='w-full text-label-solid-default fixed bottom-0 bg-white z-50 shadow-2xl'>
                 <div className='flex flex-col text-sm'>
@@ -31,8 +32,8 @@ export const ShopCartBottomNavigation = forwardRef<HTMLDivElement, React.Compone
     }
 )
 
-export const ShopBottomNavigation = forwardRef<HTMLDivElement, React.ComponentProps<'div'> & { cartData: CartData }>(
-    ({ className, children, cartData, ...props }, ref) => {
+export const ShopBottomNavigation = forwardRef<HTMLDivElement, React.ComponentProps<'div'> & { cartData: CartData; handlePrepareOrder: () => void; }>(
+    ({ className, children, cartData, handlePrepareOrder, ...props }, ref) => {
         const { totalPrice, items } = cartData.data
         const totalSale = items.reduce(
             (sum, item) => sum + (item.price.price - item.price.sale) * item.quantity,
@@ -53,7 +54,7 @@ export const ShopBottomNavigation = forwardRef<HTMLDivElement, React.ComponentPr
                         <div className='font-medium text-label-solid-default'>{formatKRW(3000)}</div>
                     </div>
                     <div className='px-4 py-3'>
-                        <ShopButton onClick={handleOrder} className='w-full'>{formatKRW(totalPrice)} 주문하기</ShopButton>
+                        <ShopButton onClick={handlePrepareOrder} className='w-full'>{formatKRW(totalPrice)} 주문하기</ShopButton>
                     </div>
                 </div>
             </div>

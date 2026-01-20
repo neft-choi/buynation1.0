@@ -15,7 +15,7 @@ import { CartData } from '@/pages/shop/cart';
 
 
 
-export default function ShopCartLayout({ children, className, cartData, ...props }: React.ComponentProps<'div'> & { cartData: CartData }) {
+export default function ShopCartLayout({ children, className, cartData, handlePrepareOrder, ...props }: React.ComponentProps<'div'> & { cartData: CartData; handlePrepareOrder: () => void; }) {
     const { recommandProducts } = usePage<SharedData>().props;
     return (
         <>
@@ -51,7 +51,7 @@ export default function ShopCartLayout({ children, className, cartData, ...props
                 </div>
             </ShopLayout>
             {cartData.data.items.length > 0 && (
-                <ShopBottomNavigation cartData={cartData} />
+                <ShopBottomNavigation handlePrepareOrder={handlePrepareOrder} cartData={cartData} />
             )}
         </>
     )

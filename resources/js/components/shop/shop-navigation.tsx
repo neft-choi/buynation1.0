@@ -1,13 +1,14 @@
 import { Link, router } from '@inertiajs/react';
 import React, { forwardRef } from 'react'
-import { IconName, ShopIcon } from './shop-icon';
+import { IconName, KoIconName, ShopIcon } from './shop-icon';
 import { ShopButton, ShopIconButton } from './shop-button';
 import { cn, formatKRW } from '@/lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import { CartData } from '@/pages/shop/cart';
 
 interface ShopNavigationProps extends React.HTMLAttributes<HTMLDivElement> {
     title?: string;
-    icon?: IconName | IconName[];
+    icon?: KoIconName | KoIconName[];
 }
 
 const handleOrder = () => {
@@ -30,24 +31,29 @@ export const ShopCartBottomNavigation = forwardRef<HTMLDivElement, React.Compone
     }
 )
 
-export const ShopBottomNavigation = forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
-    ({ className, children, ...props }, ref) => {
+export const ShopBottomNavigation = forwardRef<HTMLDivElement, React.ComponentProps<'div'> & { cartData: CartData }>(
+    ({ className, children, cartData, ...props }, ref) => {
+        const { totalPrice, items } = cartData.data
+        const totalSale = items.reduce(
+            (sum, item) => sum + (item.price.price - item.price.sale) * item.quantity,
+            0
+        )
         return (
-            <div ref={ref} className='w-full text-label-solid-default fixed bottom-0 bg-white z-50 shadow-2xl'>
+            <div ref={ref} className={cn(className, 'w-full text-label-solid-default sticky bottom-0 bg-white z-50 shadow-2xl')}>
                 <div className='bg-fill-solid-subtler text-center text-[13px] font-medium py-2'>
                     11월 5일(월) 도착 예정
                 </div>
                 <div className=' flex flex-col gap-1 text-sm'>
                     <div className='flex justify-between px-3 pt-3'>
                         <div className='text-label-solid-subtler font-light'>총 할인금액</div>
-                        <div className='font-medium text-label-solid-default'>{formatKRW(-3500)}</div>
+                        <div className='font-medium text-label-solid-default'>{formatKRW(-totalSale)}</div>
                     </div>
                     <div className='flex justify-between px-3'>
                         <div className='text-label-solid-subtler font-light'>배송비</div>
                         <div className='font-medium text-label-solid-default'>{formatKRW(3000)}</div>
                     </div>
                     <div className='px-4 py-3'>
-                        <ShopButton onClick={handleOrder} className='w-full'>{formatKRW(41000)} 주문하기</ShopButton>
+                        <ShopButton onClick={handleOrder} className='w-full'>{formatKRW(totalPrice)} 주문하기</ShopButton>
                     </div>
                 </div>
             </div>
@@ -60,7 +66,7 @@ export function ShopNavigation({ title, icon, className }: ShopNavigationProps) 
         <div className={cn('w-full grid grid-cols-3 h-14 place-items-center content-center px-4 text-label-solid-default sticky top-0 bg-white shrink-0 z-50', className)}>
             <div className='w-full flex justify-start items-center cursor-pointer'>
                 <ShopIconButton onClick={() => history.back()} className='size-6 border-none bg-transparent'>
-                    <ShopIcon name={'Chevron-Left'} className='size-6' />
+                    <ShopIcon name={'펼침(왼쪽)'} className='size-6' />
                 </ShopIconButton>
             </div>
             <div className='w-full flex justify-center items-center text-lg font-semibold'>

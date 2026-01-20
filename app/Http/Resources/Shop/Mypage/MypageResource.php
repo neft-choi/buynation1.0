@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Shop\Mypage;
 
+use App\Http\Resources\Shop\Product\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,16 +26,7 @@ class MypageResource extends JsonResource
             'name' => $this['name'],
             'point' => $this['point'],
             'recent_products' => collect($this['recent_products'])->map(
-                fn($product)=>[
-                    "discountRate" => $product['discount_rate'],
-                    "donation_percent" => $product['donation_percent'],
-                    "image_url" => $product['donation_percent'],
-                    "original_price" => $product['original_price'],
-                    "price" => $product['price'],
-                    "product_id" => $product['product_id'],
-                    "title" => $product['title'],
-                    "viewed_at" => $product['viewed_at'],
-                ]
+                fn($product)=>new ProductResource($product)
             )
         ];
     }

@@ -38,31 +38,17 @@ class CategoryController extends Controller
             'max_price' => $maxPrice
         ]);
 
-        $hasFilter = !empty($filters);
-        if ($hasFilter) {
-            $params = array_merge(['sort'=>$sort],['keyword'=>$category_slug],$filters);
+        $params = array_merge(['sort'=>$sort],['keyword'=>$category_slug],$filters);
 
 
-            $params = array_filter($params);
+        $params = array_filter($params);
 
-            $categoryData = $this->apiServer->send(
-                'shop',
-                'search_products',
-                 $params
-            );
-
-        } else {
-           $params = array_merge(['sort'=>$sort],['keyword'=>$category_slug],$filters);
-
-
-            $params = array_filter($params);
-
-            $categoryData = $this->apiServer->send(
-                'shop',
-                'search_products',
-                 $params
-            );
-        }
+        $categoryData = $this->apiServer->send(
+            'shop',
+            'search_category',
+                $params
+        );
+        
         // dd($params);
 
 

@@ -1,5 +1,6 @@
 <?php 
     use App\Http\Controllers\Shop\MyPage\IndexController;
+    use App\Http\Controllers\Shop\MyPage\LatestController;
     use App\Http\Controllers\Shop\MyPage\LikeController;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
@@ -16,9 +17,7 @@
         })->name('welcome.index');
 
         //최근본상품
-        Route::get('latest', function () {
-            return Inertia::render('shop/mypage/latest/index');
-        })->name('latest.index');
+        Route::get('latest', [LatestController::class,'index'])->name('latest.index');
 
         //주문내역
         Route::get('order', function () {

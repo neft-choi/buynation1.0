@@ -9,6 +9,7 @@ import ShopStepper from './shop-stepper'
 import { Label } from '../ui/label'
 import { CartData, CartProduct } from '@/pages/shop/cart'
 import { Link, router, useForm } from '@inertiajs/react'
+import { ShopEmpty } from './shop-empty'
 
 export default function ShopCartItemContainer({ cartData }: { cartData: CartData }) {
 
@@ -198,16 +199,7 @@ export default function ShopCartItemContainer({ cartData }: { cartData: CartData
 
                     </div>
                 )) : (
-                    <div className='w-full h-[calc(100vh-110px)] flex flex-col items-center justify-center  text-base text-label-solid-subtle gap-3'>
-                        <div>
-                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.1001 4.10001H8.1001L13.4201 28.94C13.6153 29.8497 14.1214 30.663 14.8515 31.2397C15.5816 31.8165 16.4899 32.1207 17.4201 32.1H36.9801C37.8904 32.0985 38.7731 31.7866 39.4822 31.2157C40.1912 30.6448 40.6844 29.8491 40.8801 28.96L44.1801 14.1H10.2401M18.0001 42C18.0001 43.1046 17.1047 44 16.0001 44C14.8955 44 14.0001 43.1046 14.0001 42C14.0001 40.8954 14.8955 40 16.0001 40C17.1047 40 18.0001 40.8954 18.0001 42ZM40.0001 42C40.0001 43.1046 39.1047 44 38.0001 44C36.8955 44 36.0001 43.1046 36.0001 42C36.0001 40.8954 36.8955 40 38.0001 40C39.1047 40 40.0001 40.8954 40.0001 42Z" stroke="#393939" strokeOpacity="0.35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-
-
-                        </div>
-                        장바구니에 담긴 상품이 없습니다
-                    </div>
+                    <ShopEmpty icon={'장바구니'} text='장바구니에 담긴 상품이 없습니다' />
                 )}
 
             </div>

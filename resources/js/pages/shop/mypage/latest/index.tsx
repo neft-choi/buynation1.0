@@ -55,7 +55,7 @@ export default function Index({ latestData }: { latestData: LatestData }) {
         <ShopMypageLayout title='최근 본 상품'>
             <div className='px-4 py-6  w-full'>
                 <div className="w-full text-label-solid-default">
-                    {sortedDates && sortedDates.length > 0 ? sortedDates.map((date) => (
+                    {sortedDates && sortedDates.length < 0 ? sortedDates.map((date) => (
                         <div key={date} className="mb-6">
                             <div className="w-full text-left font-semibold text-[15px] mb-3">
                                 {date}

@@ -18,7 +18,7 @@ export type IconName =
     'Megaphone' | 'Message-Square-Heart' | 'Message-Square-Warning' | 'Pin' |
     'Point-Yellow' | 'Profile-X' | 'Shoppingbag' | 'Square-Pen' | 'Truck' |
     'Clock-Fading' | 'Document-Yellow' | 'Heart-Yellow' |
-    'Message-Square-Heart-Yellow' | 'Coupon-Solid';
+    'Message-Square-Heart-Yellow' | 'Coupon-Solid' | 'Heart-Fill';
 export type KoIconName =
     '아래 화살표' |
     '좌 화살표' |
@@ -60,6 +60,7 @@ export type KoIconName =
     '좋아요' |
     '구글' |
     '하트' |
+    '하트(채움)' |
     '하트(노랑)' |
     '하트 악수' |
     '하트 손' |
@@ -164,6 +165,7 @@ const koreanToIconMap: Record<KoIconName, IconName> = {
     '좋아요': 'Good',
     '구글': 'Google',
     '하트': 'Heart',
+    '하트(채움)': 'Heart-Fill',
     '하트(노랑)': 'Heart-Yellow',
     '하트 악수': 'Heart-Handshake',
     '하트 손': 'HeartHand',

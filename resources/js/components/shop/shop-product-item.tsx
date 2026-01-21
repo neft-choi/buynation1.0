@@ -48,8 +48,22 @@ const BottomComponent = ({ rating = 0, purchaseCount = 0, displayTags }: BottomT
         </div>
     )
 }
-const handleLike = () => {
-    // 좋아요 기능 구현
+export const handleLike = (product_id: number, options?: {
+    onSuccess?: () => void;
+    onError?: () => void;
+}) => {
+
+    router.post(route('shop.mypage.like.store'), {
+        product_id: product_id,
+    }, {
+        preserveScroll: true,
+        preserveState: true,
+        onSuccess: (page) => {
+            toast.success(page.props.success as string);
+            options?.onSuccess?.();
+        },
+    },);
+
 }
 export const handleAddCart = (product_id: number, quantity: number, options?: {
     onSuccess?: () => void;
@@ -67,10 +81,13 @@ export const handleAddCart = (product_id: number, quantity: number, options?: {
             options?.onSuccess?.();
         },
     },);
+
 }
+
+
 const ProductComponent = (props: ProductComponentProps) => {
     if (props.type === '1' || props.type === '2') {
-        const { title, imageUrl, price, donationPercent, displayAreas, rating = 0, purchaseCount = 0, className, displayTags, tags, id } = props;
+        const { title, imageUrl, price, donationPercent, displayAreas, rating = 0, purchaseCount = 0, className, displayTags, tags, id, liked_at } = props;
         return (
             <>
                 {props.type === '1' &&
@@ -102,7 +119,18 @@ const ProductComponent = (props: ProductComponentProps) => {
                         </div>
                         <div className='w-full'>
                             <div className='grid grid-cols-2 gap-1 w-full'>
-                                <ShopIconButton variant={'outline'} size={'rectangleSm'}><ShopIcon name='하트' className='size-5' /></ShopIconButton>
+                                <ShopIconButton
+                                    variant={'outline'}
+                                    size={'rectangleSm'}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        handleLike(id);
+                                    }}
+                                >
+                                    {liked_at ? (<ShopIcon name='하트(채움)' className={cn('size-5 text-red-500')} />) : (<ShopIcon name='하트' className={cn('size-5')} />)}
+
+                                </ShopIconButton>
                                 <ShopIconButton
                                     variant={'outline'}
                                     size={'rectangleSm'}
@@ -151,7 +179,15 @@ const ProductComponent = (props: ProductComponentProps) => {
 
                         <div className='w-full'>
                             <div className='grid grid-cols-2 gap-1 w-full'>
-                                <ShopIconButton variant={'outline'} size={'rectangleSm'}><ShopIcon name='하트' className='size-5' /></ShopIconButton>
+                                <ShopIconButton
+                                    variant={'outline'}
+                                    size={'rectangleSm'}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        handleLike(id);
+                                    }}
+                                ><ShopIcon name='하트' className='size-5' /></ShopIconButton>
                                 <ShopIconButton variant={'outline'} size={'rectangleSm'}
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -214,9 +250,15 @@ const ProductComponent = (props: ProductComponentProps) => {
                                         {formatKRW(slider.price.sale)}
                                     </div>
                                     <div className="grid grid-cols-2 gap-1 w-full ">
-                                        <ShopIconButton variant={'outline'} size={'rectangleSm'}>
-                                            <ShopIcon name="하트" className="size-5" />
-                                        </ShopIconButton>
+                                        <ShopIconButton
+                                            variant={'outline'}
+                                            size={'rectangleSm'}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                handleLike(slider.id);
+                                            }}
+                                        ><ShopIcon name='하트' className='size-5' /></ShopIconButton>
                                         <ShopIconButton variant={'outline'} size={'rectangleSm'}
                                             onClick={(e) => {
                                                 e.preventDefault();

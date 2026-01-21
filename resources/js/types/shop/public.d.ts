@@ -11,7 +11,7 @@ export interface Product extends BottomType {
   tags: string[];
   displayAreas: string[];
   shippingTypes: string[];
-
+  liked_at?:string;
 }
 
 export type BottomType = {

@@ -16,8 +16,6 @@ import { Toaster } from '@/components/ui/sonner';
 import ShopLayout from '../shop-layout';
 
 export default function ShopMypageLayout({ children, className, title, icon, bottomNavigation = false, ...props }: React.ComponentProps<'div'> & { title?: string; icon?: IconName; bottomNavigation?: boolean; }) {
-
-    const { categoryDrawerOpen } = useUiStore();
     return (
         <ShopLayout>
             {children}

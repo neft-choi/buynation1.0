@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Shop\MyPage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Shop\Mypage\LikeResource;
+use App\Services\ApiServer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ApiServer $apiService)
     {
-        //
+        $likeData =  $apiService->send('shop','list_liked_products');
+        // dd($likeData);
+        return Inertia::render('shop/mypage/like/index',[
+                // 'keyword' => $keyword,
+                // 'sort' => $sort,
+                'likeData' => LikeResource::collection($likeData['data']['items']),
+            ]);
     }
 
     /**
@@ -26,9 +35,20 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    
+    public function store(ApiServer $apiServer,Request $request)
     {
-        //
+        //리퀘스트에서 상품 아이디와 수량을 받아서 넘긴다
+        $itemData = $request->all();
+        // dd($itemData);
+        $likeData = $apiServer->send(
+            'shop',
+            'toggle_like_product',
+            [
+                'product_id'=>$itemData['product_id']
+            ]
+        );
+        return redirect()->back()->with('success',$likeData['message']);
     }
 
     /**

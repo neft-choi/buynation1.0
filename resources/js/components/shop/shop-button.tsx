@@ -15,7 +15,7 @@ const buttonVariants = cva(
                 secondary: "bg-fill-solid-strongest !text-white border",
             },
             size: {
-                lg: "w-full px-4 py-2 h-auto",
+                lg: "w-full p-4 h-auto",
                 sm: "w-auto px-4 py-2 h-auto text-sm",
             },
         },

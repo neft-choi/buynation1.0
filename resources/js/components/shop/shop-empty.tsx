@@ -10,7 +10,7 @@ import {
 import { ShopButton } from "./shop-button"
 import { KoIconName, ShopIcon } from "./shop-icon"
 
-export function ShopEmpty({ icon, text, buttonLabel = '쇼핑하러 가기', href = '/' }: { icon: KoIconName; text: string; buttonLabel?: string, href?: string }) {
+export function ShopEmpty({ icon, text, buttonLabel, href }: { icon: KoIconName; text: string; buttonLabel?: string, href?: string }) {
     return (
         <Empty className="h-full min-h-[400px]">
             <EmptyHeader>
@@ -23,7 +23,7 @@ export function ShopEmpty({ icon, text, buttonLabel = '쇼핑하러 가기', hre
             </EmptyHeader>
             {buttonLabel && href &&
                 <EmptyContent>
-                    <ShopButton href={href} variant={'secondary'} className="w-auto text-sm font-semibold text-white">
+                    <ShopButton href={href} variant={'secondary'} className="w-auto text-sm font-semibold text-white px-4 py-2">
                         {buttonLabel}
                     </ShopButton>
                 </EmptyContent>

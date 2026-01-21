@@ -50,7 +50,7 @@ export default function Index({ latestData }: { latestData: LatestData }) {
             return acc
         }, {} as Record<string, Product[]>)
         : {}
-    const sortedDates = Object.keys(groupedItems).sort((a, b) => (a > b ? 1 : -1))
+    const sortedDates = Object.keys(groupedItems).sort((a, b) => (a < b ? 1 : -1))
     return (
         <ShopMypageLayout title='최근 본 상품'>
             <div className='px-4 py-6  w-full'>

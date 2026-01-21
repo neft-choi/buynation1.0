@@ -199,7 +199,7 @@ export default function ShopCartItemContainer({ cartData }: { cartData: CartData
 
                     </div>
                 )) : (
-                    <ShopEmpty icon={'장바구니'} text='장바구니에 담긴 상품이 없습니다' />
+                    <ShopEmpty icon={'장바구니'} text='장바구니에 담긴 상품이 없습니다' buttonLabel='쇼핑하러 가기' href='/' />
                 )}
 
             </div>

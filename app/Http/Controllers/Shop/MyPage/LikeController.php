@@ -3,20 +3,16 @@
 namespace App\Http\Controllers\Shop\MyPage;
 
 use App\Http\Controllers\Controller;
-use App\Services\ApiServer;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(ApiServer $apiService)
+    public function index()
     {
-        $likeData= $apiService->send('shop','list_liked_products');
-        dd($likeData);
-        return Inertia::render('shop/mypage/like/index');
+        //
     }
 
     /**

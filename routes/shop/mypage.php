@@ -1,4 +1,5 @@
 <?php 
+    use App\Http\Controllers\Shop\MyPage\CouponController;
     use App\Http\Controllers\Shop\MyPage\IndexController;
     use App\Http\Controllers\Shop\MyPage\LatestController;
     use App\Http\Controllers\Shop\MyPage\LikeController;
@@ -28,9 +29,7 @@
         Route::get('like', [LikeController::class , 'index'])->name('like.index');
         Route::post('like', [LikeController::class , 'store'])->name('like.store');
         //쿠폰
-        Route::get('coupon', function () {
-            return Inertia::render('shop/mypage/coupon/index');
-        })->name('coupon.index');
+        Route::get('coupon', [CouponController::class , 'index'])->name('coupon.index');
 
         //faq
         Route::get('faq', function () {

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\ApiServerInterface;
+use Auth;
 use Illuminate\Support\Facades\Http;
 
 class ApiServer implements ApiServerInterface
@@ -27,10 +28,31 @@ class ApiServer implements ApiServerInterface
             $request->withToken(session('api_access_token'));
         }
 
-        return $request->post('/api', [
+        $response = $request->post('/api', [
             'role' => $role,
             'action' => $action,
             'payload' => $payload,
-        ])->json();
+        ]);
+
+        $json = $response->json();
+
+        // 🔥 인증 만료 / 실패 공통 처리
+        if ($json['success'] == false) {
+            $this->forceLogout();
+        }
+        // dd($json);
+        return $json;
+    }
+     protected function forceLogout(): void
+    {
+        // 외부 API 토큰 제거
+        session()->forget('api_access_token');
+
+        // 라라벨 로그인도 같이 쓰는 경우
+        Auth::logout();
+
+        // 세션 완전 초기화
+        session()->invalidate();
+        session()->regenerateToken();
     }
 }

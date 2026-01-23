@@ -1,5 +1,6 @@
-import { ShopIcon } from '@/components/shop/shop-icon';
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { ChevronRight } from 'lucide-react';
+import { AdminCardHeader } from './AdminCardHeader';
 
 export function SalesShipping() {
     const stats = [
@@ -11,28 +12,24 @@ export function SalesShipping() {
 
     return (
         <Card>
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">판매/배송</h3>
-                        <span className="text-xs text-gray-500">{'>'}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-500">최근 12:34</span>
-                        <button className="text-gray-400 hover:text-gray-600">
-                            <ShopIcon name="초기화" className="size-4" />
-                        </button>
-                    </div>
-                </div>
-                <CardDescription className="text-xs text-gray-500">최근 14일 기준</CardDescription>
-            </CardHeader>
+            <AdminCardHeader title="판매/배송" showChevron={true} subtitle="최근 14일 기준" rightContent="최근 12:34" onRightButtonClick={() => {}} />
             <CardContent>
-                <div className="mb-6 grid grid-cols-4 gap-3">
+                <div className="mb-8 grid grid-cols-7 items-end">
                     {stats.map((stat, idx) => (
-                        <div key={idx} className="text-center">
-                            <div className="mb-2 text-2xl font-bold">{stat.value}</div>
-                            <div className="text-xs text-gray-600">{stat.label}</div>
-                        </div>
+                        <>
+                            {/* 요소 */}
+                            <div key={`stat-${idx}`} className="col-span-1 text-center">
+                                <div className="mb-2 text-2xl font-bold">{stat.value}</div>
+                                <div className="text-xs text-gray-600">{stat.label}</div>
+                            </div>
+
+                            {/* 화살표 */}
+                            {idx < stats.length - 1 && (
+                                <div key={`arrow-${idx}`} className="col-span-1 flex justify-center">
+                                    <ChevronRight className="size-5 text-gray-300" />
+                                </div>
+                            )}
+                        </>
                     ))}
                 </div>
             </CardContent>

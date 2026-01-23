@@ -1,23 +1,28 @@
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import { ShopIcon } from '../shop/shop-icon';
+import { Card, CardContent } from '@/components/ui/card';
+import { AdminCardHeader } from './AdminCardHeader';
 
-export function PaymentSettlement() {
+export interface SettlementProps {
+    amount?: number;
+}
+
+export function PaymentSettlement({ amount = 0 }: SettlementProps) {
+    const isEmpty = amount === 0;
+
     return (
         <Card>
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div className="font-semibold">정산</div>
-                    <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-500">최근 12:34</span>
-                        <button className="text-gray-400 hover:text-gray-600">
-                            <ShopIcon name="초기화" className="size-4" />
-                        </button>
+            <AdminCardHeader title="정산" showChevron={true} rightContent="최근 12:34" onRightButtonClick={() => {}} />
+            <CardContent>
+                <div className="flex flex-col items-end justify-center pt-12">
+                    {/* 금액 표시 */}
+                    <div className="text-3xl my-2 font-bold text-gray-900">
+                        {amount.toLocaleString()}
+                        <span className="ml-1 text-xl">원</span>
                     </div>
-                </div>
-                <CardDescription className="text-xs text-gray-500">최근 30일 기준</CardDescription>
-            </CardHeader>
 
-            <CardContent></CardContent>
+                    {/* 빈 상태 메세지 */}
+                    {isEmpty && <p className="text-sm text-gray-600">지급 예정 금액이 없습니다</p>}
+                </div>
+            </CardContent>
         </Card>
     );
 }

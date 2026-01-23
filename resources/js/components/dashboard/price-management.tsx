@@ -1,8 +1,8 @@
-import { ShopIcon } from '@/components/shop/shop-icon';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Info } from 'lucide-react';
+import { Info, ChevronRight } from 'lucide-react';
+import { AdminCardHeader } from './AdminCardHeader';
 
 interface PriceItem {
     label: string;
@@ -39,39 +39,17 @@ export function PriceManagement() {
 
     return (
         <Card>
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">가격관리</h3>
-
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <button className="text-gray-400 hover:text-gray-600">
-                                        <Info className="size-3.5" />
-                                    </button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>자동 가격 조정 설정 관련 정보</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-
-                        <span className="text-xs text-gray-500">{'>'}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-500">최근 12:34</span>
-                        <button className="text-gray-400 hover:text-gray-600">
-                            <ShopIcon name="초기화" className="size-4" />
-                        </button>
-                    </div>
-                </div>
-            </CardHeader>
-
+            <AdminCardHeader
+                title="가격관리"
+                showTooltip={true}
+                tooltipContent="자동 가격 조정 설정 관련 정보"
+                showChevron={true}
+                rightContent="최근 12:34"
+                onRightButtonClick={() => {}}
+            />
             <CardContent>
                 {listItems.map((item) => (
-                    <Label key={item.label} className="flex cursor-pointer items-center justify-between gap-2 space-y-2">
+                    <Label key={item.label} className="flex cursor-pointer items-baseline justify-between gap-2 space-y-2">
                         <div className="flex items-center gap-2">
                             <span className="text-sm text-gray-700">{item.label}</span>
 
@@ -80,7 +58,7 @@ export function PriceManagement() {
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <button className="text-gray-300 hover:text-gray-500">
-                                                <Info className="size-3.5" />
+                                                <Info className="size-4" />
                                             </button>
                                         </TooltipTrigger>
                                         <TooltipContent side="top">
@@ -92,8 +70,8 @@ export function PriceManagement() {
                         </div>
 
                         <div className="flex items-center gap-1">
-                            <span className="font-semibold text-lg text-gray-900">{item.value} 개</span>
-                            <ShopIcon name="Arrow-Right" className="size-4 text-gray-400" />
+                            <span className="text-xl font-bold text-gray-900">{item.value} 개</span>
+                            <ChevronRight className="size-4 text-gray-400" />
                         </div>
                     </Label>
                 ))}

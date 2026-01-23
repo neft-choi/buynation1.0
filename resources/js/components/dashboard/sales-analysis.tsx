@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Card, CardContent } from '@/components/ui/card';
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { ShopIcon } from '../shop/shop-icon';
+import { AdminCardHeader } from './AdminCardHeader';
 
 // Mock 데이터
 const chartData = [
@@ -33,15 +33,24 @@ const chartConfig: ChartConfig = {
     },
 };
 
+// 커스텀 범례
+function CustomLegend() {
+    return (
+        <div className="flex items-center justify-end gap-6">
+            {Object.entries(chartConfig).map(([key, config]) => (
+                <div key={key} className="flex items-center gap-2">
+                    <div className="size-1 w-3" style={{ backgroundColor: config.color }} />
+                    <span className="text-sm text-gray-600">{config.label}</span>
+                </div>
+            ))}
+        </div>
+    );
+}
+
 export function SalesAnalysis() {
     return (
         <Card>
-            <CardHeader>
-                <div className="flex items-center justify-between">
-                    <div className="font-semibold">판매분석</div>
-                </div>
-            </CardHeader>
-
+            <AdminCardHeader title="판매분석" rightContent={<CustomLegend />} />
             <CardContent>
                 <ChartContainer config={chartConfig} className="min-h-[250px] w-full">
                     <AreaChart data={chartData} margin={{ left: 12, right: 12 }}>
@@ -74,25 +83,8 @@ export function SalesAnalysis() {
                         <ChartTooltip cursor={true} content={<ChartTooltipContent indicator="line" />} />
 
                         {/* 영역 차트들 */}
-                        <Area
-                            yAxisId="left"
-                            dataKey="salesVolume"
-                            type="monotone"
-                            stroke="var(--color-salesVolume)"
-                            fill="none"
-                            name="판매량"
-                        />
-                        <Area
-                            yAxisId="right"
-                            dataKey="revenue"
-                            type="monotone"
-                            stroke="var(--color-revenue)"
-                            fill="none"
-                            name="매출"
-                        />
-
-                        {/* 범례 */}
-                        <ChartLegend content={<ChartLegendContent />} />
+                        <Area yAxisId="left" dataKey="salesVolume" type="monotone" stroke="var(--color-salesVolume)" fill="none" name="판매량" />
+                        <Area yAxisId="right" dataKey="revenue" type="monotone" stroke="var(--color-revenue)" fill="none" name="매출" />
                     </AreaChart>
                 </ChartContainer>
             </CardContent>

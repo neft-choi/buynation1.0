@@ -20,6 +20,28 @@ const DEFAULT_CONDITIONS: ConditionItem[] = [
 ];
 
 export function PremiumSellers({ statusMessage = '판매자님은 지난 달 일반판매자입니다.', conditions = DEFAULT_CONDITIONS }: PremiumSellersProps) {
+    // 현재 값 단위 표시
+    const formatCurrent = (label: string, current: number) => {
+        if (label.includes('아이템위너')) {
+            return `${current}%`;
+        }
+        return current.toLocaleString();
+    };
+
+    // 목표 값 단위 표시
+    const formatTarget = (label: string, target: number) => {
+        if (label.includes('매출')) {
+            return target >= 100000000 ? `${(target / 100000000).toFixed(0)}억` : target.toLocaleString();
+        }
+        if (label.includes('아이템위너')) {
+            return `${target}% 이상`;
+        }
+        if (label.includes('판매자 점수')) {
+            return `${target}항목`;
+        }
+        return target.toLocaleString();
+    };
+
     return (
         <Card>
             <AdminCardHeader title="우수판매자" showChevron={true} rightContent={statusMessage} />
@@ -29,10 +51,10 @@ export function PremiumSellers({ statusMessage = '판매자님은 지난 달 일
                         const isAchieved = condition.current >= condition.target;
 
                         return (
-                            <div key={index} className="grid grid-cols-3">
+                            <div key={index} className="grid grid-cols-3 items-center justify-items-center">
                                 <span>{condition.label}</span>
                                 <span className="text-sm font-medium text-gray-900">
-                                    {condition.current.toLocaleString()} / {condition.target.toLocaleString()}
+                                    {formatCurrent(condition.label, condition.current)} / {formatTarget(condition.label, condition.target)}
                                 </span>
                                 <div className="flex gap-1">
                                     <CheckCircle2

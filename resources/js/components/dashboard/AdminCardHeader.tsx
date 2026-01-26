@@ -1,5 +1,5 @@
 import { CardDescription, CardHeader } from '@/components/ui/card';
-import { ChevronRight, Info, RotateCw } from 'lucide-react';
+import { ChevronRight, CircleQuestionMark, RotateCw } from 'lucide-react';
 import { ReactNode } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
@@ -34,7 +34,7 @@ export function AdminCardHeader({
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <button className="text-gray-400 hover:text-gray-600">
-                                        <Info className="ml-1 size-4" />
+                                        <CircleQuestionMark className="ml-1 size-4 hover:cursor-pointer" />
                                     </button>
                                 </TooltipTrigger>
                                 <TooltipContent side="top">
@@ -51,7 +51,7 @@ export function AdminCardHeader({
                     {rightContent && <span className="text-xs text-gray-500">{rightContent}</span>}
                     {onRightButtonClick && (
                         <button onClick={onRightButtonClick} className="text-gray-400 hover:text-gray-600">
-                            <RotateCw className="size-4" />
+                            <RotateCw className="size-4 hover:cursor-pointer" />
                         </button>
                     )}
                 </div>

@@ -1,13 +1,6 @@
-import { PaymentSettlement } from '@/components/dashboard/payment-settlement';
-import { PendingInquiries } from '@/components/dashboard/pending-inquiries';
-import { PremiumSellers } from '@/components/dashboard/premium-sellers';
-import { PriceManagement } from '@/components/dashboard/price-management';
-import { ProductManagement } from '@/components/dashboard/product-management';
-import { ReturnExchange } from '@/components/dashboard/return-exchange';
-import { SalesAnalysis } from '@/components/dashboard/sales-analysis';
-import { SalesShipping } from '@/components/dashboard/sales-shipping';
-import { SellerGuide } from '@/components/dashboard/seller-guide';
-import { SellerRequests } from '@/components/dashboard/seller-requests';
+import { AdminButton } from '@/components/dashboard/admin-button';
+import { AdminInput } from '@/components/dashboard/admin-input';
+import { AdminDashboard } from '@/components/dashboard/AdminDashboard';
 import { PublicTable } from '@/components/public-table';
 import { ShopButton, ShopIconButton } from '@/components/shop/shop-button';
 import { ShopCheckbox } from '@/components/shop/shop-checkbox';
@@ -216,16 +209,11 @@ export default function Index() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="justify-cebter flex flex-col gap-4 p-4">
-                <SalesShipping />
-                <PriceManagement />
-                <ReturnExchange />
-                <PendingInquiries />
-                <SalesAnalysis />
-                <PaymentSettlement />
-                <ProductManagement />
-                <SellerRequests />
-                <PremiumSellers />
-                <SellerGuide />
+                <AdminDashboard />
+                <AdminButton>Admin Primary button 테스트</AdminButton>
+                <AdminButton variant='adminSecondary'>Admin Secondry button 테스트</AdminButton>
+                <AdminButton href='/admin/home'>링크 버튼 테스트</AdminButton>
+                <AdminInput placeholder='Admin Input 테스트' />
             </div>
             <div className="flex flex-col justify-center gap-4 overflow-x-auto rounded-xl p-8">
                 <ShopCheckbox id="check" />

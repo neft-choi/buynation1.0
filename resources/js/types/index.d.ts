@@ -1,7 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
 import { ItemsResponse, ProductMetaResponse } from './shop/home';
-import { DetailItemResponse } from './shop/product';
 
 export interface Auth {
     user: User;
@@ -19,11 +18,16 @@ export interface NavGroup {
 
 export interface NavItem {
     title: string;
-    href: string;
-    role?:UserRole;
+    href?: string;
+    role?: UserRole;
     icon?: LucideIcon | null;
     isActive?: boolean;
+    items?: {
+        title: string;
+        href: string;
+    }[];
 }
+
 export interface SearchSuggestionsData {
     popular_keywords: PopularKeyword[];
     recommended_images: RecommendedImage[];
@@ -36,7 +40,7 @@ export interface SearchSuggestionsResponse {
 export interface SharedData {
     access_token?: string | null;
     category?: string | null;
-    cart:{count:number};
+    cart: { count: number };
     subcategory?: string | null;
     child?: string | null;
     name: string;
@@ -44,11 +48,11 @@ export interface SharedData {
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
-    success: string|null;
+    success: string | null;
     metaData: ProductMetaResponse;
-    searchSuggestions:SearchSuggestionsResponse
-    keyword?:string;
-    recommandProducts:ItemsResponse;
+    searchSuggestions: SearchSuggestionsResponse;
+    keyword?: string;
+    recommandProducts: ItemsResponse;
     [key: string]: unknown;
 }
 
@@ -73,24 +77,24 @@ export interface TableProps<T> {
 }
 
 export interface BuygentTableProps {
-    id:string;
-    name:string;
-    yesterdaySales:number;
-    cumulativeSales:number;
-    yestermonthSales:number;
-    monthlySales:MonthlySalesProps[];
+    id: string;
+    name: string;
+    yesterdaySales: number;
+    cumulativeSales: number;
+    yestermonthSales: number;
+    monthlySales: MonthlySalesProps[];
 }
 
 export interface MonthlySalesProps {
-    month: '1월'|'2월'|'3월'|'4월'|'5월'|'6월'|'7월'|'8월'|'9월'|'10월'|'11월'|'12월';
+    month: '1월' | '2월' | '3월' | '4월' | '5월' | '6월' | '7월' | '8월' | '9월' | '10월' | '11월' | '12월';
     sales: number;
 }
 export interface BuycleTableProps {
-    id:string;
-    buycleName:string;
-    buycleCode:string;
-    buygentName:string;
-    password:string;
-    aproved:ApprovalStatus
+    id: string;
+    buycleName: string;
+    buycleCode: string;
+    buygentName: string;
+    password: string;
+    aproved: ApprovalStatus;
 }
-export type ApprovalStatus = "pending" | "approved" | "rejected";
+export type ApprovalStatus = 'pending' | 'approved' | 'rejected';

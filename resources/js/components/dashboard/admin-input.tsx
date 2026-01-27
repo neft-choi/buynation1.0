@@ -1,16 +1,5 @@
 import { cn } from '@/lib/utils';
-import { cva } from 'class-variance-authority';
-
-interface AdminInputProps {
-    value: string;
-    onChange: (value: string) => void;
-    placeholder?: string;
-    variant?: 'adminDefault' | 'adminError';
-    size?: 'sm' | 'lg';
-    className?: string;
-    disabled?: boolean;
-    type?: 'text' | 'email' | 'password' | 'number';
-}
+import { cva, VariantProps } from 'class-variance-authority';
 
 const adminInputVariants = cva(
     'flex h-10 w-full rounded-md border px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
@@ -32,14 +21,13 @@ const adminInputVariants = cva(
     },
 );
 
-export function AdminInput({ value, onChange, placeholder, variant, size, className, disabled, type = 'text', ...props }: AdminInputProps) {
+type AdminInputProps = React.ComponentProps<'input'> & VariantProps<typeof adminInputVariants>;
+
+export function AdminInput({ value, onChange, variant, size, className, ...props }: AdminInputProps) {
     return (
         <input
-            type={type}
             value={value}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder={placeholder}
-            disabled={disabled}
+            onChange={onChange}
             className={cn(adminInputVariants({ variant, size, className }))}
             {...props}
         />

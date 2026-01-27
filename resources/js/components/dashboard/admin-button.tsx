@@ -1,18 +1,8 @@
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
-import { cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { Button } from '../ui/button';
-
-interface AdminButtonProps {
-    children: React.ReactNode;
-    variant?: 'adminPrimary';
-    size?: 'lg' | 'sm';
-    className?: string;
-    href?: string;
-    onClick?: () => void;
-    disabled?: boolean;
-}
 
 const adminButtonVariants = cva('disabled:bg-fill-normal-strong disabled:text-white items-center justify-center', {
     variants: {
@@ -31,8 +21,9 @@ const adminButtonVariants = cva('disabled:bg-fill-normal-strong disabled:text-wh
     },
 });
 
-export function AdminButton({ children, variant, size, className, href, onClick, disabled, ...props }: AdminButtonProps) {
-    // href가 들어가면 Link를 사용
+type AdminButtonProps = React.ComponentProps<'button'> & VariantProps<typeof adminButtonVariants> & { href?: string };
+
+export function AdminButton({ children, size, variant, className, href, ...props }: AdminButtonProps) {
     if (href) {
         return (
             <Link href={href} className={cn(adminButtonVariants({ variant, size, className }))}>
@@ -41,7 +32,7 @@ export function AdminButton({ children, variant, size, className, href, onClick,
         );
     }
     return (
-        <Button className={cn(adminButtonVariants({ variant, size, className }))} onClick={onClick} disabled={disabled} {...props}>
+        <Button className={cn(adminButtonVariants({ variant, size, className }))} {...props}>
             {children}
         </Button>
     );

@@ -212,6 +212,8 @@ export default function Index() {
                 <AdminDashboard />
                 <AdminButton>Admin Primary button 테스트</AdminButton>
                 <AdminButton variant='adminSecondary'>Admin Secondry button 테스트</AdminButton>
+                <AdminButton variant='adminDisabled'>Admin Disabled button 테스트</AdminButton>
+                <AdminButton variant='adminDisabledStrong'>Admin Disabled button 테스트</AdminButton>
                 <AdminButton href='/admin/home'>링크 버튼 테스트</AdminButton>
                 <AdminInput placeholder='Admin Input 테스트' />
             </div>

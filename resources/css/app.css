@@ -204,19 +204,13 @@
     --dim-dimmer-52: rgba(0, 0, 0, 0.52);
 
     /* 관리자 css */
-    --admin-primary-text: rgba(17, 17, 17, 1);
-    --admin-secondary-text: rgba(52, 106, 255, 1);
-
-    --admin-primary-bg: rgba(52, 106, 255, 1);
-    --admin-secondary-bg: rgba(245, 245, 245, 1);
-
-    --admin-primary-fg: rgba(255, 255, 255, 1);
-    --admin-secondary-fg: rgba(17, 17, 17, 1);
-
-    --admin-border: rgba(52, 106, 255, 0.3);
-    --admin-border-strong: rgba(52, 106, 255, 1);
-
-    --admin-hover-bg: rgba(52, 106, 255, 0.9);
+    --admin-primary-normal: rgba(52, 106, 255, 1);
+    --admin-primary-hover: rgba(52, 106, 255, 0.9);
+    --admin-primary-light: rgba(52, 106, 255, 0.3);
+    --admin-white-normal: rgba(255, 255, 255, 1);
+    --admin-black-normal: rgba(17, 17, 17, 1);
+    --admin-gray-normal: rgba(153, 153, 153, 1);
+    --admin-gray-light: rgba(204, 204, 204, 1);
 }
 .dark {
     --background: oklch(0.141 0.005 285.823);
@@ -305,19 +299,22 @@
     --color-dim-dimmer-52: var(--dim-dimmer-52);
 
     /* 관리자 theme */
-    --color-admin-primary-text: var(--admin-primary-text);
-    --color-admin-secondary-text: var(--admin-secondary-text);
+    --color-admin-primary-text: var(--admin-white-normal);
+    --color-admin-secondary-text: var(--admin-black-normal);
+    --color-admin-disabled-text: var(--admin-gray-normal);
 
-    --color-admin-primary-bg: var(--admin-primary-bg);
-    --color-admin-secondary-bg: var(--admin-secondary-bg);
+    --color-admin-primary-bg: var(--admin-primary-normal);
+    --color-admin-secondary-bg: var(--admin-white-normal);
+    --color-admin-disabled-bg: var(--admin-white-normal);
+    --color-admin-disabled-strong-bg: var(--admin-gray-light);
 
-    --color-admin-primary-fg: var(--admin-primary-fg);
-    --color-admin-secondary-fg: var(--admin-secondary-fg);
+    --color-admin-primary-fg: var(--admin-white-normal);
+    --color-admin-secondary-fg: var(--admin-black-normal);
 
-    --color-admin-border: var(--admin-border);
-    --color-admin-border-strong: var(--admin-border-strong);
+    --color-admin-border: var(--admin-primary-light);
+    --color-admin-border-strong: var(--admin-primary-normal);
 
-    --color-admin-hover-bg: var(--admin-hover-bg);
+    --color-admin-hover-bg: var(--admin-primary-light);
 }
 
 @layer base {

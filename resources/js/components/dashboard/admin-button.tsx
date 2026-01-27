@@ -7,8 +7,10 @@ import { Button } from '../ui/button';
 const adminButtonVariants = cva('disabled:bg-fill-normal-strong disabled:text-white items-center justify-center', {
     variants: {
         variant: {
-            adminPrimary: 'bg-[var(--color-admin-primary-bg)] text-[var(--color-admin-primary-fg)]',
-            adminSecondary: 'bg-[var(--color-admin-secondary-bg)] text-[var(--color-admin-secondary-fg)]',
+            adminPrimary: 'text-[var(--color-admin-primary-fg)] bg-[var(--color-admin-primary-bg)]',
+            adminSecondary: 'text-[var(--color-admin-secondary-fg)] bg-[var(--color-admin-secondary-bg)]',
+            adminDisabled: 'text-[var(--color-admin-disabled-text)] bg-[var(--color-admin-disabled-bg)]',
+            adminDisabledStrong: 'text-[var(--color-admin-disabled-text)] bg-[var(--color-admin-disabled-strong-bg)]',
         },
         size: {
             lg: 'w-full p-4 h-auto',

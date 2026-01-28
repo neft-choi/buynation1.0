@@ -10,7 +10,7 @@ enum RolesEnum: string
     case Buycle = 'buycle';
     case Buymer = 'buymer';
     case Developer = 'developer';
-
+    case Seller = 'seller';
     public static function labels(): array
     {
         return [
@@ -20,6 +20,7 @@ enum RolesEnum: string
             self::Buycle->value => 'Buycle',
             self::Buymer->value => 'Buymer',
             self::Developer->value => 'Developer',
+            self::Seller->value => 'Seller',
         ];
     }
 
@@ -32,6 +33,8 @@ enum RolesEnum: string
             self::Buycle => 'Buycle',
             self::Buymer => 'Buymer',
             self::Developer => 'Developer',
+            self::Seller => 'Seller',
+
         };
     }
 }

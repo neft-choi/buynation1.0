@@ -6,8 +6,8 @@ use Inertia\Inertia;
 
 Route::middleware(['auth','verified','role_or_higher:'.RolesEnum::Buymer->value]) 
     ->group(function () {
-    Route::get('buycle/home', function () {
+    Route::get('buycle', function () {
         return Inertia::render('admin/buycle/index');
-    })->name('buycle.home');
+    })->name('buycle');
 
 });

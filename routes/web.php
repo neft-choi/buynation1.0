@@ -45,5 +45,6 @@ require __DIR__.'/buygent.php';
 require __DIR__.'/buycle.php';
 require __DIR__.'/buymer.php';
 require __DIR__.'/guest.php';
+require __DIR__.'/seller.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

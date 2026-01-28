@@ -38,7 +38,7 @@ export function AppSidebar() {
         // 로근한 유저정보와 네비의 role을 비교하여 자신의 role일 경우 맞는 네비 아이템만 보여줌
         // console.log(auth.user)
         // console.log(item.role)
-        if (hasRole(auth.props.auth.user, 'developer') || hasRole(auth.props.auth.user, item.role)) {
+        if (hasRole(auth.props.auth.user, 'developer') || hasRole(auth.props.auth.user, item.role!)) {
             // console.log(auth.user.roles, item.role);
             return true; // If the user has the required role, show the item
         }

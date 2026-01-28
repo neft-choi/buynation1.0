@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 import { Button } from '../ui/button';
 
-const adminButtonVariants = cva('disabled:bg-fill-normal-strong disabled:text-white items-center justify-center', {
+const adminButtonVariants = cva('border disabled:bg-fill-normal-strong disabled:text-white items-center justify-center', {
     variants: {
         variant: {
             adminPrimary: 'text-[var(--color-admin-primary-fg)] bg-[var(--color-admin-primary-bg)]',

@@ -69,7 +69,7 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export type UserRole = 'admin' | 'buygent' | 'buycle' | 'developer' | 'guest';
+export type UserRole = 'admin' | 'buygent' | 'buycle' | 'developer' | 'guest' | 'seller';
 
 export interface TableProps<T> {
     data: T[];

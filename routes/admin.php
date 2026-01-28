@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified', 'role_or_higher:' . RolesEnum::Admin->val
 
         // Admin 
         Route::controller(AdminController::class)->group(function () {
-            Route::get('home', 'index')->name('index');
+            Route::get('/', 'index')->name('index');
         });
 
         // Upload 
@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified', 'role_or_higher:' . RolesEnum::Admin->val
 
         // Buygent 
         Route::controller(BuygentController::class)->prefix('buygent')->name('buygent.')->group(function () {
-            Route::get('home', 'index')->name('index');          // 목록
+            Route::get('/', 'index')->name('index');          // 목록
             Route::get('create', 'create')->name('create');   // 생성 폼
             Route::post('/', 'store')->name('store');         // 생성 저장
             // Route::get('{id}/edit', 'edit')->name('edit');    // 수정 폼
@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified', 'role_or_higher:' . RolesEnum::Admin->val
 
         // Buycle 
         Route::controller(BuycleController::class)->prefix('buycle')->name('buycle.')->group(function () {
-            Route::get('home', 'index')->name('index');
+            Route::get('/', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('/', 'store')->name('store');
         });

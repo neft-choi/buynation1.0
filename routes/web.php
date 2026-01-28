@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 Route::fallback(function () {
-    return redirect('home'); 
+    return redirect('/'); 
 });
 
 Route::get('/', function () {
@@ -31,13 +31,15 @@ Route::get('home', function () {
 
     if($path === 'developer'){
         $path = 'admin';
+        return redirect($path);
     }
 
     if($path ==='buymer'){
         $path = 'shop';
+        return redirect($path.'/home');
     }
 
-    return redirect($path.'/home');
+    
 })->name('home');
 
 require __DIR__.'/admin.php';

@@ -1,7 +1,7 @@
 import { AdminButton } from '@/components/dashboard/admin-button';
 import { AdminInput } from '@/components/dashboard/admin-input';
 import { AdminCardTitle } from '@/components/dashboard/AdminCardTitle';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Combobox, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxList } from '@/components/ui/combobox';
 import { Field, FieldLabel } from '@/components/ui/field';
@@ -10,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
+import { CircleAlert } from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -55,10 +56,17 @@ export default function Create() {
                     <CardHeader>
                         <AdminCardTitle title="상품명" required={true} />
                     </CardHeader>
-                    <CardContent>
-                        <AdminInput placeholder="상품명 입력(브랜드명 + 제품명)" />
+                    <CardContent className="space-y-2">
+                        <AdminInput placeholder="상품명 입력(브랜드명 + 제품명)" showCharCount={true} />
+                        <div className="text-xs">실제 판매 페이지에 노출되는 상품명입니다. 쿠팡 기준에 맞게 변경될 수 있습니다.</div>
                     </CardContent>
-                    <CardFooter className="text-sm">실제 판매 페이지에 노출되는 상품명입니다. 쿠팡 기준에 맞게 변경될 수 있습니다.</CardFooter>
+                    <CardFooter className="text-sm">
+                        <AdminCardTitle
+                            title="등록상품명(판매자관리용)"
+                            variant="small"
+                            question="발주서에 사용되는 상품명으로, 고객에게 보이지 않습니다. 관리하기 편한 이름으로 설정해주세요."
+                        />
+                    </CardFooter>
                 </Card>
 
                 {/* 카테고리 카드 */}
@@ -68,9 +76,19 @@ export default function Create() {
                     </CardHeader>
                     <CardContent>
                         <Tabs defaultValue="search">
-                            <TabsList>
-                                <TabsTrigger value="search">카테고리명 검색</TabsTrigger>
-                                <TabsTrigger value="select">카테고리명 선택</TabsTrigger>
+                            <TabsList className="grid w-full grid-cols-2 bg-transparent p-0 text-admin-secondary-text">
+                                <TabsTrigger
+                                    value="search"
+                                    className="border-color-admin-border rounded-l-md rounded-r-none border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    카테고리명 검색
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="select"
+                                    className="border-color-admin-border rounded-l-none rounded-r-md border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    카테고리명 선택
+                                </TabsTrigger>
                             </TabsList>
 
                             <TabsContent value="search">
@@ -95,16 +113,23 @@ export default function Create() {
                     </CardHeader>
                     <CardContent>
                         <Tabs defaultValue="option">
-                            <TabsList>
-                                <TabsTrigger value="option">옵션별 상품 등록</TabsTrigger>
-                                <TabsTrigger value="single">단일 상품 등록</TabsTrigger>
+                            <TabsList className="grid w-full grid-cols-2 bg-transparent p-0 text-admin-secondary-text">
+                                <TabsTrigger
+                                    value="option"
+                                    className="border-color-admin-border rounded-l-md rounded-r-none border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    옵션별 상품 등록
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="single"
+                                    className="border-color-admin-border rounded-l-none rounded-r-md border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    단일 상품 등록
+                                </TabsTrigger>
                             </TabsList>
 
                             <TabsContent value="option">
-                                <div>구매옵션은 고객이 주문할 때 선택하는 옵션입니다.</div>
-                                <div>
-                                    <AdminButton variant="adminPrimary">상품 옵션 등록</AdminButton>
-                                </div>
+                                <div>옵션별 상품 등록</div>
                             </TabsContent>
 
                             <TabsContent value="single">
@@ -121,20 +146,27 @@ export default function Create() {
                     </CardHeader>
                     <CardContent>
                         <Tabs defaultValue="default">
-                            <TabsList>
-                                <TabsTrigger value="default">기본 등록</TabsTrigger>
-                                <TabsTrigger value="optional">옵션별 등록</TabsTrigger>
+                            <TabsList className="grid w-full grid-cols-2 bg-transparent p-0 text-admin-secondary-text">
+                                <TabsTrigger
+                                    value="default"
+                                    className="border-color-admin-border rounded-l-md rounded-r-none border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    기본 등록
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="optional"
+                                    className="border-color-admin-border rounded-l-none rounded-r-md border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    옵션별 등록
+                                </TabsTrigger>
                             </TabsList>
 
                             <TabsContent value="default">
-                                <div>이미지가 옵션별로 다른 경우에는 '옵션별 등록'을 선택해주세요.</div>
-                                <div>
-                                    <AdminButton variant="adminSecondary">상품 등록</AdminButton>
-                                </div>
+                                <div>기본 등록</div>
                             </TabsContent>
 
                             <TabsContent value="optional">
-                                <div>단일 상품 등록</div>
+                                <div>옵션별 등록</div>
                             </TabsContent>
                         </Tabs>
                         <AdminCardTitle title="대표이미지" required={true} question="대표이미지" />
@@ -148,11 +180,30 @@ export default function Create() {
                         <AdminCardTitle title="상세설명" required={true} help={true} collapsible={true} />
                     </CardHeader>
                     <CardContent>
-                        <div>기본 등록/옵션별 등록</div>
-                        <div>
-                            <span>작성된 내용이 없습니다.</span>
-                            <button>작성하기</button>
-                        </div>
+                        <Tabs defaultValue="default">
+                            <TabsList className="grid w-full grid-cols-2 bg-transparent p-0 text-admin-secondary-text">
+                                <TabsTrigger
+                                    value="default"
+                                    className="border-color-admin-border rounded-l-md rounded-r-none border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    기본 등록
+                                </TabsTrigger>
+                                <TabsTrigger
+                                    value="optional"
+                                    className="border-color-admin-border rounded-l-none rounded-r-md border-1 transition-none data-[state=active]:border-admin-primary-bg data-[state=active]:bg-admin-primary-bg data-[state=active]:text-admin-primary-text"
+                                >
+                                    옵션별 등록
+                                </TabsTrigger>
+                            </TabsList>
+
+                            <TabsContent value="default">
+                                <div>기본 등록</div>
+                            </TabsContent>
+
+                            <TabsContent value="optional">
+                                <div>옵션별 등록</div>
+                            </TabsContent>
+                        </Tabs>
                     </CardContent>
                 </Card>
 
@@ -162,31 +213,31 @@ export default function Create() {
                         <AdminCardTitle title="상품 주요정보" required={true} help={true} collapsible={true} />
                     </CardHeader>
                     <CardContent className="flex flex-col gap-4">
-                        <div>
-                            <CardTitle>브랜드</CardTitle>
+                        <div className="space-y-2">
+                            <AdminCardTitle title="브랜드" required={true} question="브랜드" variant="small" />
                             <AdminInput placeholder="브랜드를 입력해주세요" />
                             <Field orientation="horizontal">
                                 <Checkbox id="brand-checkbox" name="brand-checkbox" />
                                 <FieldLabel htmlFor="brand-checkbox">브랜드 없음 (또는 자체 제작)</FieldLabel>
                             </Field>
                         </div>
-                        <div>
-                            <CardTitle>상품 유형</CardTitle>
+                        <div className="space-y-2">
+                            <AdminCardTitle title="상품 유형" required={true} question="상품 유형" variant="small" />
                             <RadioGroup>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2">
                                     <RadioGroupItem value="single" id="single" />
                                     <Label htmlFor="single">한 가지로만 구성된 상품</Label>
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2">
                                     <RadioGroupItem value="multiple" id="multiple" />
                                     <Label htmlFor="multiple">두 가지 이상 함께 구성된 상품</Label>
                                 </div>
                             </RadioGroup>
                         </div>
                     </CardContent>
-                    <CardFooter className="text-sm">
+                    <CardFooter className="text-xs">
                         <span>미성년자 구매, 부가세, 제조사, 인증정보, 병행수입, 인당 최대구매수량, 판매기간...</span>
-                        <div>입력 더보기</div>
+                        <div className="pl-1 text-admin-primary-bg">입력 더보기</div>
                     </CardFooter>
                 </Card>
 
@@ -195,8 +246,8 @@ export default function Create() {
                     <CardHeader>
                         <AdminCardTitle title="검색어" help={true} collapsible={true} />
                     </CardHeader>
-                    <CardContent>
-                        <CardTitle>태그</CardTitle>
+                    <CardContent className="space-y-2">
+                        <AdminCardTitle title="태그" variant="small" question="태그" />
                         <div className="flex">
                             <AdminInput placeholder="쉼표(,)로 구분, 최대 20개" />
                             <AdminButton className="ml-1 rounded-xl" variant="adminSecondary">
@@ -212,8 +263,10 @@ export default function Create() {
                         <AdminCardTitle title="상품정보제공고시" required={true} help={true} collapsible={true} />
                     </CardHeader>
                     <CardContent>
-                        <div>아이콘</div>
-                        <span>아직 등록된 상품 카테고리가 없습니다. 맨 위에서 카테고리를 선택해주세요.</span>
+                        <div className="flex items-center gap-2 text-sm">
+                            <CircleAlert className="h-5 w-5 fill-orange-400 text-white rotate-180" />
+                            <span>아직 등록된 상품 카테고리가 없습니다. 맨 위에서 카테고리를 선택해주세요.</span>
+                        </div>
                     </CardContent>
                 </Card>
 

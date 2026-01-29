@@ -44,11 +44,9 @@ class ApiServer implements ApiServerInterface
         $json = $response->json();
 
         // 🔥 인증 만료 / 실패 공통 처리
-        if ($json['success'] == false) {
+        if ($json['success'] == false && $withAuth) {
+            // dd($json['success']);
             $this->forceLogout();
-            throw new AuthenticationException(
-                $json['message'] ?? '인증이 만료되었습니다.'
-            );
         }
         // dd($json);
         return $json;

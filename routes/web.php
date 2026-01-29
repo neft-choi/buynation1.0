@@ -21,9 +21,11 @@ Route::get('test',function(Request $request){
 })->name('test');
 
 Route::get('home', function () {
+
     $user = Auth::user();
-      if (!$user) {
+    if (!$user) {
         return redirect('/shop/home');
+        // 로그인 상태 아닐때 홈으로 보내버린다
     }
 
     
@@ -33,7 +35,10 @@ Route::get('home', function () {
         $path = 'admin';
         return redirect($path);
     }
-
+    if($path === 'seller'){
+        $path = 'seller';
+        return redirect($path);
+    }
     if($path ==='buymer'){
         $path = 'shop';
         return redirect($path.'/home');

@@ -10,7 +10,7 @@ import {
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
     const page = usePage();
@@ -19,6 +19,17 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
     const toggleMenu = (title: string) => {
         setActiveMenu((prev) => (prev === title ? null : title));
     };
+
+    const currentPath = page.url;
+
+    const autoOpenTitle = useMemo(() => {
+        const parent = items.find((item) => item.items?.some((subItem) => subItem.href === currentPath));
+        return parent?.title ?? null;
+    }, [items, currentPath]);
+
+    useEffect(() => {
+        if (autoOpenTitle) setActiveMenu(autoOpenTitle);
+    }, [autoOpenTitle]);
 
     return (
         <SidebarGroup className="px-2 py-0">
@@ -51,11 +62,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                                 )}
                             </>
                         ) : (
-                            <SidebarMenuButton
-                                asChild
-                                isActive={item.href ? page.url.startsWith(item.href) : false}
-                                tooltip={{ children: item.title }}
-                            >
+                            <SidebarMenuButton asChild isActive={item.href ? page.url === item.href : false} tooltip={{ children: item.title }}>
                                 <Link href={item.href} prefetch>
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>

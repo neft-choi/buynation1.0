@@ -1,6 +1,5 @@
 import { AdminButton } from '@/components/dashboard/admin-button';
 import { AdminInput } from '@/components/dashboard/admin-input';
-import { AdminDashboard } from '@/components/dashboard/AdminDashboard';
 import { PublicTable } from '@/components/public-table';
 import { ShopButton, ShopIconButton } from '@/components/shop/shop-button';
 import { ShopCheckbox } from '@/components/shop/shop-checkbox';
@@ -209,13 +208,12 @@ export default function Index() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="justify-cebter flex flex-col gap-4 p-4">
-                <AdminDashboard />
                 <AdminButton>Admin Primary button 테스트</AdminButton>
-                <AdminButton variant='adminSecondary'>Admin Secondry button 테스트</AdminButton>
-                <AdminButton variant='adminDisabled'>Admin Disabled button 테스트</AdminButton>
-                <AdminButton variant='adminDisabledStrong'>Admin Disabled button 테스트</AdminButton>
-                <AdminButton href='/admin/home'>링크 버튼 테스트</AdminButton>
-                <AdminInput placeholder='Admin Input 테스트' />
+                <AdminButton variant="adminSecondary">Admin Secondry button 테스트</AdminButton>
+                <AdminButton variant="adminDisabled">Admin Disabled button 테스트</AdminButton>
+                <AdminButton variant="adminDisabledStrong">Admin Disabled button 테스트</AdminButton>
+                <AdminButton href="/admin/home">링크 버튼 테스트</AdminButton>
+                <AdminInput placeholder="Admin Input 테스트" />
             </div>
             <div className="flex flex-col justify-center gap-4 overflow-x-auto rounded-xl p-8">
                 <ShopCheckbox id="check" />

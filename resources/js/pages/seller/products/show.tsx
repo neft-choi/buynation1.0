@@ -1,12 +1,15 @@
 import { AdminCardTitle } from '@/components/dashboard/AdminCardTitle';
 import { AdminButton } from '@/components/dashboard/admin-button';
 import { AdminInput } from '@/components/dashboard/admin-input';
+import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { MoreVertical } from 'lucide-react';
+import { ChevronDown, MoreVertical } from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -77,44 +80,401 @@ export default function Show() {
                 {/* 필터 섹션 */}
                 <section className="border-t-1 py-4">
                     <div className="flex">
-                        <Select>
-                            <SelectTrigger className="w-fit rounded-full">
-                                <SelectValue placeholder="기간" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="week">1주일</SelectItem>
-                                <SelectItem value="month">1개월</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        {/* 기간 Drawer */}
+                        <Drawer>
+                            <DrawerTrigger asChild>
+                                <button className="flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm">
+                                    기간
+                                    <ChevronDown className="size-4" />
+                                </button>
+                            </DrawerTrigger>
 
-                        <Select>
-                            <SelectTrigger className="w-fit rounded-full">
-                                <SelectValue placeholder="카테고리" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="cat1">카테고리</SelectItem>
-                            </SelectContent>
-                        </Select>
+                            <DrawerContent className="pb-6">
+                                <div className="mx-auto w-full max-w-md">
+                                    <DrawerHeader className="relative px-4">
+                                        <DrawerTitle className="text-left text-lg font-semibold">기간</DrawerTitle>
 
-                        <Select>
-                            <SelectTrigger className="w-fit rounded-full">
-                                <SelectValue placeholder="재고수량" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="selling">여유</SelectItem>
-                                <SelectItem value="soldout">품절</SelectItem>
-                            </SelectContent>
-                        </Select>
+                                        <DrawerClose asChild>
+                                            <button
+                                                type="button"
+                                                className="absolute top-3 right-4 inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-muted"
+                                                aria-label="닫기"
+                                            >
+                                                <span className="text-2xl leading-none">×</span>
+                                            </button>
+                                        </DrawerClose>
+                                    </DrawerHeader>
 
-                        <Select>
-                            <SelectTrigger className="w-fit rounded-full">
-                                <SelectValue placeholder="상품타입" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="pending">대기중</SelectItem>
-                                <SelectItem value="approved">승인</SelectItem>
-                            </SelectContent>
-                        </Select>
+                                    <div className="space-y-4 px-4">
+                                        <Select defaultValue="createdAt">
+                                            <SelectTrigger className="h-12">
+                                                <SelectValue placeholder="상품등록일" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="createdAt">상품등록일</SelectItem>
+                                                <SelectItem value="updatedAt">상품수정일</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
+                                        <div className="grid grid-cols-3 overflow-hidden rounded-md border text-sm font-medium">
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                오늘
+                                            </button>
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                7일
+                                            </button>
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                30일
+                                            </button>
+
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                90일
+                                            </button>
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                180일
+                                            </button>
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                1년
+                                            </button>
+
+                                            <button type="button" className="h-12 border-t border-r bg-blue-50 font-bold text-blue-600">
+                                                전체
+                                            </button>
+                                            <div className="h-12 border-t" />
+                                            <div className="h-12 border-t" />
+                                        </div>
+
+                                        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+                                            {/* 시작일 - Dialog */}
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <button
+                                                        type="button"
+                                                        className="flex h-12 w-full items-center justify-between rounded-md border px-3 text-sm"
+                                                    >
+                                                        <span>2000.01.01.</span>
+                                                    </button>
+                                                </DialogTrigger>
+
+                                                <DialogContent className="w-[calc(100%-2rem)] max-w-md p-0">
+                                                    <div className="p-4">
+                                                        <div className="text-base font-semibold">시작일 선택</div>
+                                                    </div>
+                                                    <Calendar mode="single" className="w-full" selected={undefined} onSelect={() => {}} />
+                                                    <div className="grid grid-cols-2 gap-3 p-4">
+                                                        <DialogClose asChild>
+                                                            <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                                취소
+                                                            </AdminButton>
+                                                        </DialogClose>
+                                                        <DialogClose asChild>
+                                                            <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                                설정
+                                                            </AdminButton>
+                                                        </DialogClose>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+
+                                            <span className="text-sm text-muted-foreground">~</span>
+
+                                            {/* 종료일 - Dialog */}
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <button
+                                                        type="button"
+                                                        className="flex h-12 w-full items-center justify-between rounded-md border px-3 text-sm"
+                                                    >
+                                                        <span>2099.12.31.</span>
+                                                    </button>
+                                                </DialogTrigger>
+
+                                                <DialogContent className="w-[calc(100%-2rem)] max-w-md p-0">
+                                                    <div className="p-4">
+                                                        <div className="text-base font-semibold">종료일 선택</div>
+                                                    </div>
+                                                    <Calendar mode="single" className="w-full" selected={undefined} onSelect={() => {}} />
+                                                    <div className="grid grid-cols-2 gap-3 p-4">
+                                                        <DialogClose asChild>
+                                                            <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                                취소
+                                                            </AdminButton>
+                                                        </DialogClose>
+                                                        <DialogClose asChild>
+                                                            <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                                설정
+                                                            </AdminButton>
+                                                        </DialogClose>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+                                        </div>
+                                    </div>
+
+                                    <DrawerFooter className="px-4 pt-6">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                    취소
+                                                </AdminButton>
+                                            </DrawerClose>
+
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                    확인
+                                                </AdminButton>
+                                            </DrawerClose>
+                                        </div>
+                                    </DrawerFooter>
+                                </div>
+                            </DrawerContent>
+                        </Drawer>
+
+                        {/* 카테고리 Drawer */}
+                        <Drawer>
+                            <DrawerTrigger asChild>
+                                <button className="flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm">
+                                    카테고리
+                                    <ChevronDown className="size-4" />
+                                </button>
+                            </DrawerTrigger>
+
+                            <DrawerContent className="pb-6">
+                                <div className="mx-auto w-full max-w-md">
+                                    <DrawerHeader className="relative px-4">
+                                        <DrawerTitle className="text-left text-lg font-semibold">카테고리</DrawerTitle>
+
+                                        <DrawerClose asChild>
+                                            <button
+                                                type="button"
+                                                className="absolute top-3 right-4 inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-muted"
+                                                aria-label="닫기"
+                                            >
+                                                <span className="text-2xl leading-none">×</span>
+                                            </button>
+                                        </DrawerClose>
+                                    </DrawerHeader>
+                                    <div className="space-y-2">
+                                        <Select>
+                                            <SelectTrigger className="h-8">
+                                                <SelectValue placeholder="1차" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="category1">패션의류잡화</SelectItem>
+                                                <SelectItem value="category2">뷰티</SelectItem>
+                                                <SelectItem value="category3">출산/유아동</SelectItem>
+                                                <SelectItem value="category4">식품</SelectItem>
+                                                <SelectItem value="category5">주방용품</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
+                                        <Select>
+                                            <SelectTrigger className="h-8">
+                                                <SelectValue placeholder="2차" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="category1">가공/즉석식품</SelectItem>
+                                                <SelectItem value="category2">가루/조미료/향신료</SelectItem>
+                                                <SelectItem value="category3">건강식품</SelectItem>
+                                                <SelectItem value="category4">냉장/냉동식품</SelectItem>
+                                                <SelectItem value="category5">생수/음료</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
+                                        <Select>
+                                            <SelectTrigger className="h-8">
+                                                <SelectValue placeholder="3차" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="category1">김밥/도시락/샐러드</SelectItem>
+                                                <SelectItem value="category2">김치/반찬/젓갈</SelectItem>
+                                                <SelectItem value="category3">냉장냉동 간편조리</SelectItem>
+                                                <SelectItem value="category4">냉장면류</SelectItem>
+                                                <SelectItem value="category5">연식품</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
+                                        <Select>
+                                            <SelectTrigger className="h-8">
+                                                <SelectValue placeholder="4차" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="category1">기타 냉장면류</SelectItem>
+                                                <SelectItem value="category2">냉장 냉면/메밀</SelectItem>
+                                                <SelectItem value="category3">냉장 스파게티/파스타</SelectItem>
+                                                <SelectItem value="category4">냉장 우동/생면</SelectItem>
+                                                <SelectItem value="category5">냉장 짜장면/짬뽕</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+
+                                        <Select>
+                                            <SelectTrigger className="h-8" disabled>
+                                                <SelectValue placeholder="5차" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="category1">패션의류잡화</SelectItem>
+                                                <SelectItem value="category2">뷰티</SelectItem>
+                                                <SelectItem value="category3">출산/유아동</SelectItem>
+                                                <SelectItem value="category4">식품</SelectItem>
+                                                <SelectItem value="category5">주방용품</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    <DrawerFooter className="px-4 pt-6">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                    취소
+                                                </AdminButton>
+                                            </DrawerClose>
+
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                    확인
+                                                </AdminButton>
+                                            </DrawerClose>
+                                        </div>
+                                    </DrawerFooter>
+                                </div>
+                            </DrawerContent>
+                        </Drawer>
+
+                        {/* 재고 수량 Drawer */}
+                        <Drawer>
+                            <DrawerTrigger asChild>
+                                <button className="flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm">
+                                    재고수량
+                                    <ChevronDown className="size-4" />
+                                </button>
+                            </DrawerTrigger>
+
+                            <DrawerContent className="pb-6">
+                                <div className="mx-auto w-full max-w-md">
+                                    <DrawerHeader className="relative px-4">
+                                        <DrawerTitle className="text-left text-lg font-semibold">재고수량</DrawerTitle>
+
+                                        <DrawerClose asChild>
+                                            <button
+                                                type="button"
+                                                className="absolute top-3 right-4 inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-muted"
+                                                aria-label="닫기"
+                                            >
+                                                <span className="text-2xl leading-none">×</span>
+                                            </button>
+                                        </DrawerClose>
+                                    </DrawerHeader>
+
+                                    <div className="px-4">
+                                        <div className="grid grid-cols-2 overflow-hidden rounded-md border text-sm font-medium">
+                                            <button type="button" className="h-12 border-r border-b bg-blue-50 font-bold text-blue-600">
+                                                선택안함
+                                            </button>
+
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                재고 있음
+                                            </button>
+
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                재고 없음(품절)
+                                            </button>
+
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                재고 10개 이하
+                                            </button>
+
+                                            <button type="button" className="h-12 border-r hover:bg-muted/40">
+                                                재고 30개 이하
+                                            </button>
+
+                                            <button type="button" className="h-12 hover:bg-muted/40">
+                                                재고 50개 이하
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <DrawerFooter className="px-4 pt-6">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                    취소
+                                                </AdminButton>
+                                            </DrawerClose>
+
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                    확인
+                                                </AdminButton>
+                                            </DrawerClose>
+                                        </div>
+                                    </DrawerFooter>
+                                </div>
+                            </DrawerContent>
+                        </Drawer>
+
+                        {/* 상품타입 Drawer */}
+                        <Drawer>
+                            <DrawerTrigger asChild>
+                                <button className="flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm">
+                                    상품타입
+                                    <ChevronDown className="size-4" />
+                                </button>
+                            </DrawerTrigger>
+
+                            <DrawerContent className="pb-6">
+                                <div className="mx-auto w-full max-w-md">
+                                    <DrawerHeader className="relative px-4">
+                                        <DrawerTitle className="text-left text-lg font-semibold">상품타입</DrawerTitle>
+
+                                        <DrawerClose asChild>
+                                            <button
+                                                type="button"
+                                                className="absolute top-3 right-4 inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-muted"
+                                                aria-label="닫기"
+                                            >
+                                                <span className="text-2xl leading-none">×</span>
+                                            </button>
+                                        </DrawerClose>
+                                    </DrawerHeader>
+
+                                    <div className="px-4">
+                                        <div className="grid grid-cols-2 overflow-hidden rounded-md border text-sm font-medium">
+                                            <button type="button" className="h-12 border-r border-b bg-blue-50 font-bold text-blue-600">
+                                                전체
+                                            </button>
+
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                판매자배송
+                                            </button>
+
+                                            <button type="button" className="h-12 border-r border-b hover:bg-muted/40">
+                                                로켓그로스
+                                            </button>
+
+                                            <button type="button" className="h-12 border-b hover:bg-muted/40">
+                                                로켓그로스 가능 상품
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <DrawerFooter className="px-4 pt-6">
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminSecondary" className="h-12 w-full rounded">
+                                                    취소
+                                                </AdminButton>
+                                            </DrawerClose>
+
+                                            <DrawerClose asChild>
+                                                <AdminButton variant="adminPrimary" className="h-12 w-full rounded">
+                                                    확인
+                                                </AdminButton>
+                                            </DrawerClose>
+                                        </div>
+                                    </DrawerFooter>
+                                </div>
+                            </DrawerContent>
+                        </Drawer>
                     </div>
                 </section>
                 {/* 상품 목록 */}

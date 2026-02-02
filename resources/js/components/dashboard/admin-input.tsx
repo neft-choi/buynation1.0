@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { useState } from 'react';
 
 const adminInputVariants = cva(
-    'flex h-10 w-full rounded-sm border px-3 py-2 text-sm placeholder:font-semibold placeholder:text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+    'flex h-10 w-full rounded border px-3 py-2 text-sm placeholder:font-semibold placeholder:text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:outline focus:outline-blue-500 disabled:cursor-not-allowed disabled:opacity-50',
     {
         variants: {
             variant: {
@@ -34,7 +34,7 @@ export function AdminInput({ value, onChange, variant, size, className, rightCon
     };
 
     return (
-        <div className="relative">
+        <div className="relative w-full">
             <input
                 value={value}
                 onChange={handleChange}

@@ -53,4 +53,30 @@ Route::middleware(['auth','verified','role_or_higher:'.RolesEnum::Seller->value]
             return Inertia::render('seller/orders/order_6/index');
         })->name('order_6.index');
     });
+
+    Route::prefix('payments')        
+    ->name('payments.')
+    ->group(function(){
+        Route::get('/', function () {
+            return Inertia::render('seller/payments/index');
+        })->name('index');
+    });
+
+     Route::prefix('customers')        
+    ->name('customers.')
+    ->group(function(){
+
+        Route::get('customer_1', function () {
+            return Inertia::render('seller/customers/customer_1/index');
+        })->name('customer_1.index');
+
+            Route::get('customer_2', function () {
+            return Inertia::render('seller/customers/customer_2/index');
+        })->name('customer_2.index');
+
+        Route::get('customer_3', function () {
+            return Inertia::render('seller/customers/customer_3/index');
+        })->name('customer_3.index');
+    });
+
 });

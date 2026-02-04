@@ -69,23 +69,23 @@ export const mainNavItems: NavItem[] = [
             { title: '문자 발송 내역', href: '/seller/orders/order_6' },
         ],
     },
-    // {
-    //     role: 'seller',
-    //     title: '정산 현황',
-    //     href: '/seller/home/3',
-    //     icon: CreditCard,
-    // },
-    // {
-    //     role: 'seller',
-    //     title: '고객관리',
-    //     href: '/seller/home/4',
-    //     icon: Smile,
-    //     items: [
-    //         { title: '고객 문의', href: '/seller/home/4' },
-    //         { title: '고객센터 문의', href: '/seller/home/4' },
-    //         { title: '상품평', href: '/seller/home/4' },
-    //     ],
-    // },
+    {
+        role: 'seller',
+        title: '정산 현황',
+        href: '/seller/payments',
+        icon: CreditCard,
+    },
+    {
+        role: 'seller',
+        title: '고객관리',
+        href: '/seller/home/4',
+        icon: Smile,
+        items: [
+            { title: '고객 문의', href: '/seller/customers/customer_1' },
+            { title: '고객센터 문의', href: '/seller/customers/customer_2' },
+            { title: '상품평', href: '/seller/customers/customer_3' },
+        ],
+    },
     // {
     //     role: 'seller',
     //     title: '판매자정보',

@@ -20,10 +20,14 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
         setActiveMenu((prev) => (prev === title ? null : title));
     };
 
-    const currentPath = page.url;
+    const currentPath = page.url.split('?')[0];
+
+    const isPathMatch = (href: string) => {
+        return currentPath === href || currentPath.startsWith(`${href}/`);
+    };
 
     const autoOpenTitle = useMemo(() => {
-        const parent = items.find((item) => item.items?.some((subItem) => subItem.href === currentPath));
+        const parent = items.find((item) => item.items?.some((subItem) => isPathMatch(subItem.href)));
         return parent?.title ?? null;
     }, [items, currentPath]);
 
@@ -53,7 +57,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                                     <SidebarMenuSub>
                                         {item.items.map((subItem, subIndex) => (
                                             <SidebarMenuSubItem key={subItem.title || subIndex}>
-                                                <SidebarMenuSubButton asChild data-active={page.url === subItem.href}>
+                                                <SidebarMenuSubButton asChild data-active={isPathMatch(subItem.href)}>
                                                     <Link href={subItem.href}>{subItem.title}</Link>
                                                 </SidebarMenuSubButton>
                                             </SidebarMenuSubItem>

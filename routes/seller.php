@@ -79,4 +79,70 @@ Route::middleware(['auth','verified','role_or_higher:'.RolesEnum::Seller->value]
         })->name('customer_3.index');
     });
 
+     Route::prefix('profiles')        
+    ->name('profiles.')
+    ->group(function(){
+    //
+        Route::get('profile_1', function () {
+            return Inertia::render('seller/profiles/profile_1/index');
+        })->name('profile_1.index');
+
+        Route::get('profile_1/edit', function () {
+            return Inertia::render('seller/profiles/profile_1/edit');
+        })->name('profile_1.edit');
+    //
+    //
+        Route::get('profile_2', function () {
+            return Inertia::render('seller/profiles/profile_2/index');
+        })->name('profile_2.index');
+
+        Route::get('profile_2/edit', function () {
+            return Inertia::render('seller/profiles/profile_2/edit');
+        })->name('profile_2.edit');
+
+        Route::get('profile_2/create', function () {
+            return Inertia::render('seller/profiles/profile_2/create');
+        })->name('profile_2.create');
+    //
+    //
+        Route::get('profile_3', function () {
+            return Inertia::render('seller/profiles/profile_3/index');
+        })->name('profile_3.index');
+
+        Route::get('profile_3/edit', function () {
+            return Inertia::render('seller/profiles/profile_3/edit');
+        })->name('profile_3.edit');
+
+        Route::get('profile_3/create', function () {
+            return Inertia::render('seller/profiles/profile_3/create');
+        })->name('profile_3.create');
+ //
+    //
+        Route::get('profile_4', function () {
+            return Inertia::render('seller/profiles/profile_4/index');
+        })->name('profile_4.index');
+ //
+    //
+        Route::get('profile_5', function () {
+            return Inertia::render('seller/profiles/profile_5/index');
+        })->name('profile_5.index');
+        
+        Route::get('profile_5/edit', function () {
+            return Inertia::render('seller/profiles/profile_5/edit');
+        })->name('profile_5.edit');
+ //
+    //
+        Route::get('profile_6', function () {
+            return Inertia::render('seller/profiles/profile_6/index');
+        })->name('profile_6.index');
+    //
+    });
+
+    Route::prefix('settings')        
+    ->name('settings.')
+    ->group(function(){
+        Route::get('/', function () {
+            return Inertia::render('seller/settings/index');
+        })->name('index');
+    });
 });

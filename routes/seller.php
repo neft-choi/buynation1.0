@@ -135,6 +135,14 @@ Route::middleware(['auth','verified','role_or_higher:'.RolesEnum::Seller->value]
         Route::get('profile_6', function () {
             return Inertia::render('seller/profiles/profile_6/index');
         })->name('profile_6.index');
+
+        Route::get('profile_6/edit', function () {
+            return Inertia::render('seller/profiles/profile_6/edit');
+        })->name('profile_6.edit');
+
+        Route::get('profile_6/create', function () {
+            return Inertia::render('seller/profiles/profile_6/create');
+        })->name('profile_6.create');
     //
     });
 

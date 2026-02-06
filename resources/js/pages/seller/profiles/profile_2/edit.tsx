@@ -1,6 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
-import { ChevronDown, CircleCheck } from 'lucide-react';
+import { AdminDrawer } from '@/components/dashboard/admin-drawer';
+import { ChevronDown, CircleCheck, X } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: '판매자정보', href: '/seller/profiles' },
@@ -65,9 +66,36 @@ export default function edit() {
                         <CircleCheck className='fill-green-600 text-white size-4'/>
                         <span>인증완료</span>
                     </div>
-                    <button type="button" className="w-full rounded border border-gray-300 px-4 py-2 font-semibold text-gray-500">
-                        인증하기
-                    </button>
+                    <AdminDrawer
+                        trigger={
+                            <button type="button" className="w-full rounded border border-gray-300 px-4 py-2 font-semibold text-gray-500">
+                                인증하기
+                            </button>
+                        }
+                    >
+                        <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4">
+                            <p className="font-bold">본인 인증을 위해 인증번호를 발송합니다.</p>
+                            <AdminDrawer.Close>
+                                <button type="button" className="text-2xl text-gray-500">
+                                    <X className="size-5" />
+                                </button>
+                            </AdminDrawer.Close>
+                        </div>
+                        <div className="space-y-2 px-4 py-4">
+                            <p className="font-bold">휴대전화번호</p>
+                            <input type="text" className="w-full rounded border border-gray-300 px-4 py-2" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 px-4 pb-6">
+                            <AdminDrawer.Close>
+                                <button type="button" className="rounded border border-gray-300 px-4 py-2 font-bold">
+                                    취소
+                                </button>
+                            </AdminDrawer.Close>
+                            <button type="button" className="rounded bg-blue-600 px-4 py-2 font-bold text-white">
+                                발송하기
+                            </button>
+                        </div>
+                    </AdminDrawer>
                 </section>
 
                 <section className="space-y-2 py-4">
